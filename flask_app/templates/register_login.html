@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>User Login and Registration</title>
+</head>
+<body>
+        <h1 class="text-center text-primary mx-auto">Welcome to Car Dealz!</h1>
+        <div class="d-flex justify-content-center">
+            <form action="/register" method="post" class="p-3 col-3 mx-auto my-5 bg-dark text-light">
+                <h2 class="text-center">Register:</h2>
+                {% with messages = get_flashed_messages(category_filter=['register_user']) %}
+                    {% if messages %}
+                        {% for msg in messages %}
+                        <p class="text-warning">* {{msg}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <div class="form-group">
+                    <!-- first and last at least 2 chars -->
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="first_name" id="first_name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="last_name" id="last_name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <!-- valid email format -->
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <!-- pw and confirm_pw must match-->
+                    <!-- user must NOT already be in DB -->
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="confirm_pw">Confirm Password:</label>
+                    <input type="password" name="confirm_pw" id="confirm_pw" class="form-control">
+                </div>
+                <input type="submit" value="Register" class="btn btn-primary btn-outline-dark">
+            </form>
+
+            <!-- email MUST exist in database-->
+            <!-- pw must be checked against hashed pw in DB-->
+            <form action="/login" method="post" class="p-3 col-3 mx-auto my-5 bg-dark text-light">
+                <h2 class="text-center">Login:</h2>
+                {% with messages = get_flashed_messages(category_filter=['login']) %}
+                    {% if messages %}
+                        {% for msg in messages %}
+                        <p class="text-warning">* {{msg}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" class="form-control">
+                </div>
+                
+                <input type="submit" value="Login" class="btn btn-primary btn-outline-dark">
+            </form>
+        </div>
+</body>
+</html>

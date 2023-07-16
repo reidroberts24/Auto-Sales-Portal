@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>Show Car Info</title>
+</head>
+<body>
+    <div class="d-flex justify-content-between align-items-center p-3">
+        <div></div> <!-- Empty div to push the links to the right -->
+        <div>
+            <a href="/purchase/history" class="btn btn-primary">My Purchases</a>
+            <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+            <a href="/logout" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center">
+        <div class="card w-100">
+            <div class="card-body">
+                <h3 class="card-title">${{car.price}}</h3>
+                <h4 class="card-subtitle mb-2 text-muted">Model: {{car.model}}</h4>
+                <h4 class="card-subtitle mb-2 text-muted">Make: {{car.make}}</h4>
+                <h4 class="card-subtitle mb-2 text-muted">Year: {{car.year}}</h4>
+                <h4 class="card-subtitle mb-2 text-muted">Description:</h4>
+                <h5 class="card-text">{{car.description}}</h5>
+                <div class="d-flex justify-content-between align-items-baseline">
+                    <h6 class="card-subtitle mb-2 text-muted">Seller: {{car.seller.first_name}} {{car.seller.last_name}}</h6>
+                    <a href="/purchase/car/{{car.id}}" class="btn btn-primary float-right">Purchase Car</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
